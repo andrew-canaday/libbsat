@@ -70,7 +70,6 @@ Initialize a timeout queue.
 - `loop` (if EV_MULTIPLICITY is set) libev loop
 - `cb` the callback invoked when the timeout fires
 - `after` the timeout period, in seconds (ev-style)
-- `pool_size` the number of timeouts to preallocate
 - `data` optional user data to associate with this timeout queue
 
 Returns a new `bsat_toq_t*` on success; `NULL` (with `errno` set) on failure.
