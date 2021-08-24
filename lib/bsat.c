@@ -110,6 +110,29 @@ void bsat_toq_stop(bsat_toq_t* toq)
 }
 
 
+void bsat_toq_clear(bsat_toq_t* toq)
+{
+    while( toq->head ) {
+        bsat_timeout_t* current = toq->head;
+        bsat_timeout_stop(toq, current);
+    }
+
+    ev_timer_stop(TOQ_LOOP_ &(toq->timer));
+}
+
+
+void bsat_toq_invoke_pending(bsat_toq_t* toq)
+{
+    while( toq->head ) {
+        bsat_timeout_t* current = toq->head;
+        bsat_timeout_stop(toq, current);
+        toq->cb(toq, current);
+    }
+
+    bsat_toq_clear(toq);
+}
+
+
 /*--------------------------------------------------
  * BSAT Timeout Functions:
  *--------------------------------------------------*/

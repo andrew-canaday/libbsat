@@ -81,13 +81,42 @@ void bsat_toq_init(EV_P_ bsat_toq_t* toq, bsat_callback_t cb, ev_tstamp after);
 
 ### bsat_toq_stop
 
-Stop a timeout queue.
+Stop a timeout queue. This _literally just stops the `ev_io_watcher`.
 
-> **NOTE**: Active items remain in the queue after stop _with their original
-> deadlines intact!_
+> **NOTE**: Active items remain in the queue after stop _with their
+> **original deadlines** intact!_
+
+If you want to:
+ - _Clear_ all of the pending timeouts: `bsat_toq_clear`.
+ - _Invoke the toq callback_ for all of the **pending** timeouts:
+   `bsat_toq_invoke_pending`.
+ - _Reset all_ of the timeouts: ...this is a potential TODO. Lmk.
 
 ```C
 void bsat_toq_stop(bsat_toq_t* toq);
+```
+
+
+### bsat_toq_clear
+
+Remove all pending timeouts from the queue.
+
+This is equivalent to calling `bsat_timeout_stop` on each item presently in
+the queue.
+
+```C
+void bsat_toq_clear(bsat_toq_t* toq);
+```
+
+
+### bsat_toq_invoke_pending
+
+Invoke the registered callback for every item in the queue, as if it had
+timed out _just now_. Afterwards, the queue will be in the same state as if
+you had invoked `bsat_toq_clear`.
+
+```C
+void bsat_toq_invoke_pending(bsat_toq_t* toq);
 ```
 
 
@@ -141,6 +170,10 @@ void bsat_timeout_stop(bsat_toq_t* toq, bsat_timeout_t* item);
 ### bsat_timeout_is_active
 
 Returns 1 if the timeout is active; 0 otherwise.
+
+:warning: **If you check the timeout state from _inside your registered
+callback_ this function will always return `0`** (timeouts have been
+descheduled at the time of callback invocation!).
 
 > **NOTE**: You usually _don't need to worry about this_; it's completely
 > safe to stop a stopped timeout or start a started timeout — both operations

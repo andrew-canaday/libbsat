@@ -16,7 +16,13 @@ LDADD=\
 
 AM_DEFAULT_SOURCE_EXT=.c
 check_PROGRAMS=\
-	bsat_test
+	test_toq \
+	test_timeout \
+	test_invoke \
+	test_clear
 
 TESTS=\
-	bsat_test
+	test_toq \
+	test_timeout \
+	test_invoke \
+	test_clear
