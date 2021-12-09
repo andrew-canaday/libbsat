@@ -1,0 +1,16 @@
+name: configure-make-check
+on:
+  push:
+    branches:
+      - main
+jobs:
+  make_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt-get install -y libev-dev
+      - run: ./autogen.sh
+      - run: ./configure
+      - run: make
+      - run: make check
+
