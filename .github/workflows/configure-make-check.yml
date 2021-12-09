@@ -8,10 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: sudo apt-get install -y libev-dev
-      - run: ./autogen.sh
-      - run: ./configure
-      - run: make
-      - run: make check
-      - run: make dist
+      - name: install libev
+        run: sudo apt-get install -y libev-dev
+      - name: autoreconf
+        run: ./autogen.sh
+      - name: configure
+        run: ./configure
+      - name: compile
+        run: make
+      - name: unit tests
+        run: make check
+      - name: make distribution tarball
+        run: make dist
 
