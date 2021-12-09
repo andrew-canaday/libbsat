@@ -1,5 +1,7 @@
 # libbsat
 
+[![configure-make-check](https://github.com/andrew-canaday/libbsat/actions/workflows/configure-make-check.yml/badge.svg)](https://github.com/andrew-canaday/libbsat/actions/workflows/configure-make-check.yml)
+
 This is a small C utility library which provides timeout management for
 [libev](http://software.schmorp.de/pkg/libev.html)-based projects.
 
