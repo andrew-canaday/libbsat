@@ -13,4 +13,5 @@ jobs:
       - run: ./configure
       - run: make
       - run: make check
+      - run: make dist
 
