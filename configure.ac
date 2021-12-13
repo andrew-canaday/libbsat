@@ -11,7 +11,7 @@
 #-----------------------------
 
 # NOTE: This is the PACKAGE release version, NOT the ABI version. It is SemVer:
-AC_INIT([libbsat],[0.1.0],[andrew.candaay@gmail.com],[libbsat],[https://github.com/andrew-canaday/libbsat])
+AC_INIT([libbsat],[0.1.1],[andrew.candaay@gmail.com],[libbsat],[https://github.com/andrew-canaday/libbsat])
 
 # NOTE: ABI versioning is C.R.A. (libtool) not M.m.p (semver)!!
 # C.R.A. = Current, Revision, Age:
@@ -27,7 +27,7 @@ AC_INIT([libbsat],[0.1.0],[andrew.candaay@gmail.com],[libbsat],[https://github.c
 # For more info, see:
 # - https://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 # - https://autotools.io/libtool/version.html
-AC_SUBST([BSAT_LIB_VERSION],[1:1:1]) # ABI Version
+AC_SUBST([BSAT_LIB_VERSION],[1:2:1]) # ABI Version
 
 # More package metadata:
 AC_SUBST([PACKAGE_LICENSE],["MIT"])
