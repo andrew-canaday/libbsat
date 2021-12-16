@@ -11,7 +11,9 @@
 #-----------------------------
 
 # NOTE: This is the PACKAGE release version, NOT the ABI version. It is SemVer:
-AC_INIT([libbsat],[0.1.1],[andrew.candaay@gmail.com],[libbsat],[https://github.com/andrew-canaday/libbsat])
+AC_INIT([libbsat],m4_esyscmd([printf "${BSAT_VERSION:-"0.1.1"}"]),
+	[andrew.canaday@gmail.com],[libbsat],
+	[https://github.com/andrew-canaday/libbsat])
 
 # NOTE: ABI versioning is C.R.A. (libtool) not M.m.p (semver)!!
 # C.R.A. = Current, Revision, Age:

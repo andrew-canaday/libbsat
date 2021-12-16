@@ -1,0 +1,64 @@
+name: Create Release on Tag
+on:
+  push:
+    tags:
+      - 0.*
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    env:
+      BSAT_VERSION: ${{ github.ref_name }}
+      LD_LIBRARY_PATH: /usr/local/lib
+    steps:
+      - name: Prep Source
+        run: |
+          mkdir -p ./build/bsat
+          sudo apt-get install -y \
+            libev-dev \
+            jq
+
+      #--------------------------------------------------------------------
+      # Create distrubution tarballs.
+      #
+      # TODO:
+      # - signing
+      # - distcheck
+      #--------------------------------------------------------------------
+      - name: Checkout libbsat
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref_name }}
+          path: 'libbsat'
+
+      - name: Generate Configuration
+        env:
+          BSAT_VERSION: ${{ github.ref_name }}
+        run: |
+          export BSAT_VERSION
+          ./autogen.sh
+        working-directory: ./libbsat
+
+      - name: Generate libbsat Dist GZip Tarball
+        run: |
+          ../../libbsat/configure
+          make distcheck && make dist
+        working-directory: ./build/bsat
+
+      #--------------------------------------------------------------------
+      # Cut the Release and add the artifacts.
+      #--------------------------------------------------------------------
+      - name: Cut Release
+        run: |
+          ../../libbsat/util/cut-gh-release.sh \
+            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ github.repository }}" \
+            "${{ github.ref_name }}" \
+            "${{ github.sha }}" \
+            "libbsat"
+        working-directory: ./build/bsat
