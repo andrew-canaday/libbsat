@@ -11,7 +11,7 @@
 #-----------------------------
 
 # NOTE: This is the PACKAGE release version, NOT the ABI version. It is SemVer:
-AC_INIT([libbsat],m4_esyscmd([printf "${BSAT_VERSION:-"0.1.1"}"]),
+AC_INIT([libbsat],m4_esyscmd([printf "${BSAT_VERSION:-"0.1.2"}"]),
 	[andrew.canaday@gmail.com],[libbsat],
 	[https://github.com/andrew-canaday/libbsat])
 
@@ -20,11 +20,6 @@ AC_INIT([libbsat],m4_esyscmd([printf "${BSAT_VERSION:-"0.1.1"}"]),
 # - Current: the interface version
 # - Age: how many versions prior to "current" current is backwards compat with
 # - Revision: how many times current has been released, publicly
-#
-# Semver translation:
-# - when it would be a "patch level" release: bump revision only
-# - when it would be a "minor level" release: bump current, revision, AND age
-# - when it would be a "major level" release: bump current; age = revision = 0
 #
 # For more info, see:
 # - https://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
