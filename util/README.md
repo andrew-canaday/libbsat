@@ -1,3 +1,5 @@
+> See: https://github.com/andrew-canaday/pomd4c
+
  # POMD4C
 
  `pomd4c` is a _very simplistic_ doc generator for C projects, e.g.:
