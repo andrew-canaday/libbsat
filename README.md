@@ -40,6 +40,12 @@ that haven't been reset within the specified timeout period.
  - [The api reference](./API.md)
  - [libev POD: Be Smart About Timeouts](http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod#Be_smart_about_timeouts)
 
+## Homebrew
+
+```bash
+brew tap andrew-canaday/tap
+brew install --build-from-source libbsat
+```
 
 ## Building
 
